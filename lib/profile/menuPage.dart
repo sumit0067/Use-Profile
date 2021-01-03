@@ -13,7 +13,7 @@ class _MenuPageState extends State<MenuPage> {
       children: [
         //Menu
         Container(
-          height: 250,
+          height: 200,
           child: Column(
             children: [
               Padding(

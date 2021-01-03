@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   ScrollController _scrollController;
-  dynamic selectSlide;
+  var selectSlide;
 
   List menuTitle = [
     {'itemName': 'Menu', 'select': false},
@@ -32,15 +32,27 @@ class _HomeState extends State<Home> {
   }
 
   changeSelected() {
-    var maxValue = _scrollController.position.maxScrollExtent;
-    var divide = maxValue / menuTitle.length + 20;
+    /*var maxValue = _scrollController.position.maxScrollExtent;
     var scrollValue = _scrollController.offset.round();
+    var divide = maxValue / menuTitle.length + 20;
     var slideValue = (scrollValue / divide).round();
     var currentValue = menuTitle.indexWhere((element) => element['select']);
 
+    print(slideValue);
     setState(() {
       menuTitle[currentValue]['select'] = false;
       selectSlide = menuTitle[slideValue];
+      selectSlide['select'] = true;
+    });*/
+
+    var scrollValue = _scrollController.position.pixels;
+    //print(scrollValue);
+    var divide = (scrollValue / 174).round();
+    //print(divide);
+    var currentIndex = menuTitle.indexWhere((element) => element['select']);
+    setState(() {
+      menuTitle[currentIndex]['select'] = false;
+      selectSlide = menuTitle[divide];
       selectSlide['select'] = true;
     });
   }
