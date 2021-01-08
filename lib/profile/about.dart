@@ -26,7 +26,6 @@ class _AboutPageState extends State<AboutPage> {
             ],
           ),
           Container(
-            height: 250,
             child: Card(
               elevation: 5,
               child: Column(

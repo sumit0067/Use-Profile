@@ -13,7 +13,7 @@ class _MenuPageState extends State<MenuPage> {
       children: [
         //Menu
         Container(
-          height: 200,
+          height: MediaQuery.of(context).size.height,
           child: Column(
             children: [
               Padding(
@@ -35,6 +35,7 @@ class _MenuPageState extends State<MenuPage> {
               ),
               Expanded(
                 child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: destinations.length,
                   itemBuilder: (context, index) {
                     Destination destination = destinations[index];
@@ -56,32 +57,34 @@ class _MenuPageState extends State<MenuPage> {
                                 ),
                               ),
                             ),
-                            Container(
-                              width: 270,
-                              height: 120,
-                              child: Padding(
-                                padding: EdgeInsets.only(top: 10),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(destination.city),
-                                        Text(
-                                          '\$ 14',
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(height: 5),
-                                    Text(
-                                      destination.description,
-                                      overflow: TextOverflow.fade,
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 15),
-                                    )
-                                  ],
+                            Flexible(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 120,
+                                child: Padding(
+                                  padding: EdgeInsets.only(top: 10,right: 20),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(destination.city),
+                                          Text(
+                                            '\$ 14',
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 5),
+                                      Text(
+                                        destination.description,
+                                        overflow: TextOverflow.fade,
+                                        style: TextStyle(
+                                            color: Colors.grey, fontSize: 15),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             )

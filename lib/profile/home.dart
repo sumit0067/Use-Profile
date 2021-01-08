@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:profile_page/model/destination_model.dart';
 import 'package:profile_page/profile/Review.dart';
 import 'package:profile_page/profile/about.dart';
 import 'package:profile_page/profile/menuPage.dart';
@@ -12,7 +13,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   ScrollController _scrollController;
-  var selectSlide;
+
+  var selectSlide, currentIndex;
 
   List menuTitle = [
     {'itemName': 'Menu', 'select': false},
@@ -32,27 +34,16 @@ class _HomeState extends State<Home> {
   }
 
   changeSelected() {
-    /*var maxValue = _scrollController.position.maxScrollExtent;
-    var scrollValue = _scrollController.offset.round();
-    var divide = maxValue / menuTitle.length + 20;
-    var slideValue = (scrollValue / divide).round();
+    var maxValue = _scrollController.position.maxScrollExtent;
+    var scrollValue = _scrollController.position.pixels;
+    var divide = (maxValue / menuTitle.length + 20).round();
+    var slideValue = (scrollValue / divide).truncate().round();
     var currentValue = menuTitle.indexWhere((element) => element['select']);
 
     print(slideValue);
     setState(() {
       menuTitle[currentValue]['select'] = false;
-      selectSlide = menuTitle[slideValue];
-      selectSlide['select'] = true;
-    });*/
-
-    var scrollValue = _scrollController.position.pixels;
-    //print(scrollValue);
-    var divide = (scrollValue / 174).round();
-    //print(divide);
-    var currentIndex = menuTitle.indexWhere((element) => element['select']);
-    setState(() {
-      menuTitle[currentIndex]['select'] = false;
-      selectSlide = menuTitle[divide];
+      selectSlide=menuTitle[slideValue];
       selectSlide['select'] = true;
     });
   }
@@ -68,11 +59,14 @@ class _HomeState extends State<Home> {
             ),
             Expanded(
               child: ListView(
+                physics: AlwaysScrollableScrollPhysics(),
                 controller: _scrollController,
                 scrollDirection: Axis.vertical,
                 children: [
                   MenuPage(),
+                  SizedBox(height: 10),
                   AboutPage(),
+                  SizedBox(height: 10),
                   Review(),
                 ],
               ),

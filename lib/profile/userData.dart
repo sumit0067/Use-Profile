@@ -217,7 +217,7 @@ class _UserDataState extends State<UserData> {
                       fontFamily: 'mont serrat'),
                 ),
               )),
-          ListView(
+          /*ListView(
             scrollDirection: Axis.horizontal,
             children: [
               Row(
@@ -226,6 +226,18 @@ class _UserDataState extends State<UserData> {
                 children: widget.menuTitle.map((e) => getList(e)).toList(),
               )
             ],
+          )*/
+          ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: widget.menuTitle.length.compareTo(0),
+            itemBuilder: (context, index) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: widget.menuTitle.map((e) => getList(e)).toList(),
+              );
+
+            }
           )
         ],
       ),
